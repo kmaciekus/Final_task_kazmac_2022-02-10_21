@@ -14,11 +14,14 @@ const router = Router();
 
 router.post(
 	"/register",
-	body(["fullname", "email", "password"]).exists().notEmpty(),
+	body(["firstname", "lastname", "email", "password"]).exists().notEmpty(),
+	body("firstname").trim().isAlpha().escape().withMessage("First name must not contain numbers"),
+	body("lastname").trim().isAlpha().escape().withMessage("Last name must not contain numbers"),
 	checkSchema(registrationSchema),
 	validateErrorsMiddleware,
 	async (req, res) => {
-		const { fullname, email, password } = req.body;
+		const { firstname, lastname, email, password } = req.body;
+		const fullname = firstname.concat(" ", lastname);
 		const hashed = await hash(password, 10);
 
 		try {

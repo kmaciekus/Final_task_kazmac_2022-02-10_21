@@ -1,6 +1,6 @@
 import { getConnection } from "../database/mysql.js";
 
-export default class EventGuesList {
+export default class EventGuestList {
 	constructor({ id, eventId, guestId }) {
 		this.id = id;
 		this.eventId = eventId;
@@ -9,13 +9,13 @@ export default class EventGuesList {
 
 	static async init() {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			CREATE TABLE IF NOT EXISTS eventGuestLists (
 				id INTEGER AUTO_INCREMENT NOT NULL,
 				event_id INTEGER NOT NULL,
 				guest_id INTEGER NOT NULL,
-				status VARCHAR(255) NOT NULL DEFAULT attending CHECK (status IN ('attending', 'maybe', 'not-attending')),
+				status VARCHAR(255) NOT NULL DEFAULT 'attending' CHECK (status IN ('attending', 'maybe', 'not-attending')),
 				created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				PRIMARY KEY (id),
@@ -34,14 +34,14 @@ export default class EventGuesList {
 
 	static async add({ eventId, guestId }) {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			INSERT INTO eventGuestLists (event_id, guest_id)
 			VALUES (?, ?)
 			`;
 			const [{ insertId }] = await conn.query(query, [eventId, guestId]);
 			
-			return new EventGuesList({ id: insertId, eventId, guestId });
+			return new EventGuestList({ id: insertId, eventId, guestId });
 		} catch (error) {
 			console.log("Couldn't assign to guest list", error);
 			throw error;
@@ -50,7 +50,7 @@ export default class EventGuesList {
 
 	static async getGuestList(eventId) {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			SELECT egl.guest_id as guestId, gst.fullname as fullName, gst.dob as dob, gst.email as email
 			FROM eventGuestLists AS egl
@@ -68,7 +68,7 @@ export default class EventGuesList {
 
 	static async getGuestEvents(guestId) {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			SELECT evnt.name as eventName, evnt.date as eventDate, evnt.archived as eventPast
 			FROM eventGuestLists AS egl

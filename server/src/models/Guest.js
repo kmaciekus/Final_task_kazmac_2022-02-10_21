@@ -1,9 +1,9 @@
 import { getConnection } from "../database/mysql.js";
 
 export default class Guest {
-	constructor ({id, fullName, email, dob}) {
+	constructor ({id, fullname, email, dob}) {
 		this.id=id;
-		this.fullName=fullName;
+		this.fullName=fullname;
 		this.email=email;
 		this.dob=dob;
 	}
@@ -29,15 +29,15 @@ export default class Guest {
 		}
 	}
 
-	static async add({fullName, email, dob}) {
+	static async add({fullname, email, dob}) {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			INSERT INTO guests (fullname, email, dob)
 			VALUES (?, ?, ?)
 			`;
-			const [{insertId}] = await conn.query(query, [fullName, email, dob]);
-			return new Guest({id: insertId, fullName, email, dob});
+			const [{insertId}] = await conn.query(query, [fullname, email, dob]);
+			return new Guest({id: insertId, fullname, email, dob});
 		} catch (error) {
 			console.log("Couldn't add guest", error);
 			throw error;
@@ -46,7 +46,7 @@ export default class Guest {
 
 	static async getAll() {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			SELECT * FROM guests
 			`;

@@ -31,14 +31,14 @@ export default class Event {
 
 	static async add({eventName, date}) {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			INSERT INTO events (name, date)
 			VALUES (?, ?)
 			`;
 			const [{insertId}] = await conn.query(query, [eventName, date]);
 
-			return new Event({id:insertId, eventName, date});
+			return new Event({id:insertId, name: eventName, date});
 		} catch (error) {
 			console.log("Couldn't create event", error);
 			throw error;
@@ -47,12 +47,12 @@ export default class Event {
 
 	static async getAll() {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			SELECT * FROM events
 			`;
 			const [events] = await conn.query(query);
-			if (!events) return null;
+			if (!events.length) return null;
 			return events;
 		} catch (error) {
 			console.log("Couldn't get events", error);
@@ -62,13 +62,13 @@ export default class Event {
 
 	static async getUpcomingEvents() {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			SELECT * FROM events
 			WHERE archived=0
 			`;
 			const [events] = await conn.query(query);
-			if(!events) return null;
+			if(!events.length) return null;
 			return events;
 		} catch (error) {
 			console.log("Couldn't get events", error);
@@ -78,13 +78,13 @@ export default class Event {
 
 	static async getPastEvents() {
 		try {
-			const conn = getConnection();
+			const conn = await getConnection();
 			const query = `
 			SELECT * FROM events
 			WHERE archived=1
 			`;
 			const [events] = await conn.query(query);
-			if(!events) return null;
+			if(!events.length) return null;
 			return events;
 		} catch (error) {
 			console.log("Couldn't get events", error);
