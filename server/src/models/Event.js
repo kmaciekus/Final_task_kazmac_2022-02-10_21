@@ -87,7 +87,7 @@ export default class Event {
 			if(!events) return null;
 			return events;
 		} catch (error) {
-			console.log("Coldn't get events", error);
+			console.log("Couldn't get events", error);
 			throw error;
 		}
 	}

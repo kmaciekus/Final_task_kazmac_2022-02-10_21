@@ -1,11 +1,11 @@
 import { getConnection } from "../database/mysql.js";
 
 export default class Guest {
-	constructor ({id, fullName, email, age}) {
+	constructor ({id, fullName, email, dob}) {
 		this.id=id;
 		this.fullName=fullName;
 		this.email=email;
-		this.age=age;
+		this.dob=dob;
 	}
 
 	static async init() {
@@ -16,7 +16,7 @@ export default class Guest {
 				id INTEGER AUTO_INCREMENT NOT NULL,
 				fullname VARCHAR(255) NOT NULL,
 				email VARCHAR(255) UNIQUE NOT NULL ,
-				age INTEGER,
+				dob DATE NOT NULL,
 				PRIMARY KEY (id)
 			)
 			`;
@@ -29,15 +29,15 @@ export default class Guest {
 		}
 	}
 
-	static async add({fullName, email, age}) {
+	static async add({fullName, email, dob}) {
 		try {
 			const conn = getConnection();
 			const query = `
-			INSERT INTO guests (fullname, email, age)
+			INSERT INTO guests (fullname, email, dob)
 			VALUES (?, ?, ?)
 			`;
-			const [{insertId}] = await conn.query(query, [fullName, email, age]);
-			return new Guest({id: insertId, fullName, email, age});
+			const [{insertId}] = await conn.query(query, [fullName, email, dob]);
+			return new Guest({id: insertId, fullName, email, dob});
 		} catch (error) {
 			console.log("Couldn't add guest", error);
 			throw error;
@@ -55,30 +55,6 @@ export default class Guest {
 			return guests;
 		} catch (error) {
 			console.log("Couldn't get guests", error);
-			throw error;
-		}
-	}
-
-	static async getFromList(list) {
-		let stringList = "";
-		for (const id in list) {
-			if(id==list.length-1){
-				stringList += list[id];
-			}else{
-				stringList += list[id] + ",";
-			}
-		}
-		try {
-			const conn = getConnection();
-			const query = `
-			SELECT * FROM guests
-			WHERE id IN (?)
-			`;
-			const [guests] = await conn.query(query, [stringList]);
-			if(!guests) return null;
-			return guests;
-		} catch (error) {
-			console.log("Couldn't get any guests", error);
 			throw error;
 		}
 	}
