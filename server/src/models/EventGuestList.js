@@ -52,8 +52,10 @@ export default class EventGuesList {
 		try {
 			const conn = getConnection();
 			const query = `
-			SELECT guest_id FROM eventGuestLists
-			WHERE event_id=?
+			SELECT egl.guest_id as guestId, gst.fullname as fullName, gst.dob as dob, gst.email as email
+			FROM eventGuestLists AS egl
+				LEFT JOIN guests AS gst ON gst.id = egl.guest_id
+				WHERE egl.event_id=?
 			`;
 			const [guests] = await conn.query(query,[eventId]);
 			if(!guests) return null;
@@ -68,8 +70,10 @@ export default class EventGuesList {
 		try {
 			const conn = getConnection();
 			const query = `
-			SELECT event_id FROM eventGuestLists
-			WHERE guest_id=?
+			SELECT evnt.name as eventName, evnt.date as eventDate, evnt.archived as eventPast
+			FROM eventGuestLists AS egl
+				LEFT JOIN events AS evnt ON evnt.id = egl.event_id
+				WHERE guest_id=?
 			`;
 			const [events] = await conn.query(query,[guestId]);
 			if(!events) return null;
