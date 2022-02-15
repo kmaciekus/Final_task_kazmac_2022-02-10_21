@@ -2,7 +2,7 @@ import { Router } from "express";
 import { body } from "express-validator";
 
 import Event from "../models/Event.js";
-import EventGuesList from "../models/EventGuestList.js";
+import EventGuestList from "../models/EventGuestList.js";
 
 import { loggedInMiddleware } from "../middleware/loggedIn.js";
 import { validateErrorsMiddleware } from "../middleware/validateErrorsMiddleware.js";
@@ -16,6 +16,7 @@ router.get(
 	async (req, res) => {
 		try {
 			const events = await Event.getAll();
+			if (!events) return res.status(204).send("No events yet");
 			res.status(200).send({
 				events,
 			});
@@ -36,9 +37,31 @@ router.post(
 		const { eventName, date } = req.body;
 		try {
 			const event = await Event.add({eventName, date});
-			
+
 			res.status(201).send({
-				added: event.eventName,
+				added: event.name,
+				date: event.date,
+			});
+		} catch (error) {
+			sendError(error, res);
+		}
+	}
+);
+router.post(
+	"/event/:eventId",
+	loggedInMiddleware,
+	body("guestId").exists().notEmpty().toInt(),
+	validateErrorsMiddleware,
+	async (req, res) => {
+		const { guestId } = req.body;
+		const eventId = Number(req.params.eventId);
+
+		try {
+			await EventGuestList.add({eventId, guestId});
+
+			res.status(201).send({
+				added: guestId,
+				toEvent: eventId,
 			});
 		} catch (error) {
 			sendError(error, res);
@@ -47,15 +70,15 @@ router.post(
 );
 
 router.get(
-	"/:guestId",
+	"/event/:eventId",
 	loggedInMiddleware,
 	async (req, res) => {
-		const guestId = Number(req.params.guestId);
+		const eventId = Number(req.params.eventId);
 		try {
-			const eventList = await EventGuesList.getGuestEvents(guestId);
-			if(!eventList) return res.status(204).send(`Guest with id: ${guestId} is not in the list`);
+			const guestList = await EventGuestList.getGuestList(eventId);
+			if (!guestList) return res.status(204).send(`Event with id: ${eventId} does not exists or has no guests yet.`);
 			res.status(200).send({
-				eventList,
+				guestList,
 			});
 		} catch (error) {
 			sendError(error, res);
