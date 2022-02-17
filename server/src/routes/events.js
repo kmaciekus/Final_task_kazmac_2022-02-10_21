@@ -7,8 +7,10 @@ import EventGuestList from "../models/EventGuestList.js";
 import { loggedInMiddleware } from "../middleware/loggedIn.js";
 import { validateErrorsMiddleware } from "../middleware/validateErrorsMiddleware.js";
 import { sendError } from "../utils/error.js";
+import {today} from "../utils/helpers.js";
 
 const router = Router();
+
 
 router.get(
 	"/",
@@ -31,7 +33,10 @@ router.post(
 	"/",
 	loggedInMiddleware,
 	body(["eventName", "date"]).exists().notEmpty().withMessage("Fields are missing"),
-	body("date").trim().isDate().withMessage("Must be a valid date"),
+	body("eventName").isLength({min:5, max:30}).withMessage("Event name must be at least 5 characters, but not longer than 30"),
+	body("date").isISO8601({strict:true, strictSeparator:true}),
+	body("date").isAfter().withMessage("Event's date must be in the future"),
+	body("date").isBefore(today(10)).withMessage("Event's date must not be so far in the future"),
 	validateErrorsMiddleware,
 	async (req, res) => {
 		const { eventName, date } = req.body;

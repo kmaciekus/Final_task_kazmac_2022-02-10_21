@@ -34,7 +34,7 @@ export default class Event {
 			const conn = await getConnection();
 			const query = `
 			INSERT INTO events (name, date)
-			VALUES (?, ?)
+			VALUES (?, DATE_FORMAT(?,'%Y-%m-%d %H:%i'))
 			`;
 			const [{insertId}] = await conn.query(query, [eventName, date]);
 
