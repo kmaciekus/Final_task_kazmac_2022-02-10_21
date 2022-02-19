@@ -14,9 +14,9 @@ const router = Router();
 
 router.post(
 	"/register",
-	body(["firstname", "lastname", "email", "password"]).exists().notEmpty(),
-	body("firstname").trim().isAlpha().escape().withMessage("First name must not contain numbers"),
-	body("lastname").trim().isAlpha().escape().withMessage("Last name must not contain numbers"),
+	body(["firstname", "lastname", "email", "password"]).exists().notEmpty().withMessage("Field is missing"),
+	body(["firstname", "lastname"]).trim().isAlpha().escape().withMessage("Firstname and lastname must not contain numbers")
+		.isLength({min:2, max: 25}).withMessage("Firstname and lastname must be between 2 and 25 letters"),
 	checkSchema(registrationSchema),
 	validateErrorsMiddleware,
 	async (req, res) => {
@@ -40,32 +40,36 @@ router.post(
 	}
 );
 
-router.post("/login", async (req, res) => {
-	const { email, password } = req.body;
-	try {
-		const user = await User.oneByEmail(email);
-		
-		if (!user) {
-			wrongUserDataError(res);
+router.post(
+	"/login",
+	checkSchema(registrationSchema),
+	validateErrorsMiddleware,
+	async (req, res) => {
+		const { email, password } = req.body;
+		try {
+			const user = await User.oneByEmail(email);
+			
+			if (!user) {
+				wrongUserDataError(res);
+			}
+
+			const validPw = await compare(password, user.password);
+
+			if (!validPw) {
+				return wrongUserDataError(res);
+			}
+
+			const token = jwt.sign(
+				{ user_id: user.id, username: user.fullname },
+				process.env.TOKEN_SECRET
+			);
+
+			res.send({
+				token,
+			});
+		} catch (error) {
+			sendError(error, res);
 		}
-
-		const validPw = await compare(password, user.password);
-
-		if (!validPw) {
-			return wrongUserDataError(res);
-		}
-
-		const token = jwt.sign(
-			{ user_id: user.id, username: user.fullname },
-			process.env.TOKEN_SECRET
-		);
-
-		res.send({
-			token,
-		});
-	} catch (error) {
-		sendError(error, res);
-	}
-});
+	});
 
 export default router;
