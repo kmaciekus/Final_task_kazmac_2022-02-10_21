@@ -1,0 +1,38 @@
+.card {
+	transition: all .2s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5em;
+	padding: 1em;
+	width: 200px;
+	height: auto;
+	overflow: hidden;
+	border: 1px solid rgba(200, 200, 200, 0.4);
+	border-radius: 5px;
+	text-align: center;
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(214, 214, 214, 0.15);
+	-moz-box-shadow: 5px 5px 5px 0px rgba(214, 214, 214, 0.15);
+	box-shadow: 5px 5px 5px 0px rgba(214, 214, 214, 0.15);
+}
+
+.card:hover {
+	transform: scale(1.1);
+}
+
+.card h4,
+p {
+	margin: 0;
+}
+
+.card p {
+	word-break: break-all;
+    white-space: pre-wrap;
+}
+
+
+.content-wrapper {
+	margin-bottom: 0.5em;
+	font-size: 0.85em;
+}

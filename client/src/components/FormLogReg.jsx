@@ -133,6 +133,7 @@ export const Form = ({ onUpdate, type }) => {
 			email: state.email,
 			password: state.password,
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state]);
 
 	return (
