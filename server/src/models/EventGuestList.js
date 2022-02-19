@@ -52,7 +52,7 @@ export default class EventGuestList {
 		try {
 			const conn = await getConnection();
 			const query = `
-			SELECT egl.guest_id as guestId, gst.fullname as fullName, gst.dob as dob, gst.email as email
+			SELECT egl.guest_id as id, gst.fullname as fullName, gst.dob as dob, gst.email as email
 			FROM eventGuestLists AS egl
 				LEFT JOIN guests AS gst ON gst.id = egl.guest_id
 				WHERE egl.event_id=?
@@ -70,7 +70,7 @@ export default class EventGuestList {
 		try {
 			const conn = await getConnection();
 			const query = `
-			SELECT evnt.name as eventName, evnt.date as eventDate, evnt.archived as eventPast
+			SELECT evnt.id as id evnt.name as name, evnt.date as date, evnt.archived as past
 			FROM eventGuestLists AS egl
 				LEFT JOIN events AS evnt ON evnt.id = egl.event_id
 				WHERE guest_id=?
