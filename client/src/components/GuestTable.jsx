@@ -14,7 +14,7 @@ export const GuestTable = ({ guests }) => {
 				</tr>
 			</THead>
 			<TBody>
-				{guests.map((guest) => <Guest key={guest.guestId} guest={guest} />)}
+				{guests.map((guest) => <Guest key={guest.id} guest={guest} />)}
 			</TBody>
 		</Table>
 	);
