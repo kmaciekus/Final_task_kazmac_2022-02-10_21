@@ -1,0 +1,15 @@
+table{
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+td{
+    padding: 5px;
+}
+tbody{
+    text-align: center;
+}
+tfoot{
+    text-align: right;
+}
