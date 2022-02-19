@@ -1,0 +1,32 @@
+.form-field {
+    width: 50%;
+    text-align: left;
+    
+}
+.form-field.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-field input, textarea, select {
+    margin-top: 0.3rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    background-color: rgba(107, 81, 174, 0.253);
+    border-radius: var(--input-border-radius);
+    overflow: hidden;
+    font-family: var(--primary-font-family);
+}
+
+.form-field label {
+    margin-bottom: 0.5rem;
+    color: #f2f2f2;
+	background: var(--secondary-color);
+    font-family: var(--primary-font-family);
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+.form-control {
+    margin-top: 0.5em;
+}
