@@ -1,0 +1,56 @@
+.navbar {
+	width: var(--page-width);
+	margin: auto;
+	padding: 1rem;
+}
+
+.navLinks {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navLinks img {
+	height: 60px;
+}
+.logo-wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+}
+.logo-title {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Arial Narrow', Arial, sans-serif ;
+	font-style: normal;
+	font-weight: bolder;
+	text-align: center;
+	font-size: 24px;
+
+	color: #7e0093;
+}
+.page-title {
+	color: var(--secondary-color);
+	font-size: 2rem;
+	line-height: 2rem;
+	font-weight: 700;
+	font-family: var(--secondary-font-family);
+}
+.navLinks a,
+i {
+	text-decoration: none;
+	color: var(--main-color);
+}
+.navigation {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	margin: 0;
+	padding: 0;
+	gap: 1rem;
+	color: var(--main-color);
+	font-size: 1.2rem;
+	font-weight: 600;
+}

@@ -13,11 +13,13 @@ import { AddGuest } from "./pages/AddGuest";
 import { AddEvent } from "./pages/AddEvent";
 import { NotFound } from "./pages/NotFound";
 import "./App.css";
+import { Navbar } from "./components/Navbar";
 
 function App() {
 	return (
 		<div className="App">
 			<AuthProvider>
+				<Navbar />
 				<Routes>
 					<Route
 						path="/"

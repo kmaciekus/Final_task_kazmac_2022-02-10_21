@@ -1,0 +1,11 @@
+.container {
+    width: var(--page-width);
+    margin: auto;
+    background: var(--main-background);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1em;
+    gap: 0.5em;
+    text-align: center;
+  }

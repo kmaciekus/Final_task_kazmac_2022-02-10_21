@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --main-color: rgb(107,81,174);
+  --secondary-color: #adc56b;
+  --page-width: 80%;
+  --primary-font-family: "Libre Baskerville", cursive;
+  --header-border-radius: 68px 51px 34px 17px/17px 34px 51px 68px;
+  --main-btn-border-radius: 17px 34px;
+  --secondary-btn-border-radius: 17px 34px 51px;
+  --input-border-radius: 17px 34px 51px 8.5px;
+}
