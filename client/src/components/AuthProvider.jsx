@@ -2,12 +2,25 @@ import {useState} from "react";
 import {AuthContext} from "../authHook/useAuth";
 import { EventApi } from "../services/eventsApi";
 
+const getUserdata = (token) => {
+    let user = null;
+
+    if (token) {
+        const tokenPayload = token.split(".")[1];
+        const decodedPayload = atob(tokenPayload);
+        const parsedPayload = JSON.parse(decodedPayload);
+        user = parsedPayload;
+    }
+
+    return user;
+}
 
 export const AuthProvider = ({children}) => {
     const token = sessionStorage.getItem("token");
 
     const [state, setState] = useState({
         token,
+        user: getUserdata(token),
         error: null,
     });
 
