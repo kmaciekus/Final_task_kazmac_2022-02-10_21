@@ -32,10 +32,10 @@ export const Navbar = () => {
 			<Link to="/guests">
 				<Item>Guests</Item>
 			</Link>
-			<Link to="/add">
+			<Link to="/events/add">
 				<Item>Add Event</Item>
 			</Link>
-			<Link to="/add">
+			<Link to="/guests/add">
 				<Item>Add Guest</Item>
 			</Link>
 		</Navigation>

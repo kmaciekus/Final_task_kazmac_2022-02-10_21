@@ -52,7 +52,7 @@ export default class EventGuestList {
 		try {
 			const conn = await getConnection();
 			const query = `
-			SELECT egl.guest_id as id, gst.fullname as fullname, gst.dob as dob, gst.email as email
+			SELECT DISTINCT egl.guest_id as id, gst.fullname as fullname, gst.dob as dob, gst.email as email
 			FROM eventGuestLists AS egl
 				LEFT JOIN guests AS gst ON gst.id = egl.guest_id
 				WHERE egl.event_id=?
