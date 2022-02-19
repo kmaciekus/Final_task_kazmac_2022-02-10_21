@@ -21,6 +21,7 @@ export const Home = () => {
 		if (!events.error) {
 			if (!events.events.length) return setEvents(null);
 			setEvents(events.events);
+			setError(null);
 		}
 		setError(events.error);
 	};
@@ -29,7 +30,7 @@ export const Home = () => {
     if(!e.target.id) {
       return;
     }
-    navigate("/event-guests", { state: { eventId: e.target.id } });
+    navigate("/event-guests", { state: { eventId: e.target.id, eventName: e.target.children[0].innerText } });
   }
 
 	useEffect(() => {

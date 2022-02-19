@@ -29,6 +29,9 @@ export const Navbar = () => {
 			<Link to="/">
 				<Item>Home</Item>
 			</Link>
+			<Link to="/guests">
+				<Item>Guests</Item>
+			</Link>
 			<Link to="/add">
 				<Item>Add Event</Item>
 			</Link>
