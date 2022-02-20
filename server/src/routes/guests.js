@@ -70,6 +70,22 @@ router.get(
 		}
 	}
 );
+router.get(
+	"/guest/:guestId/notIn",
+	loggedInMiddleware,
+	async (req, res) => {
+		const guestId = Number(req.params.guestId);
+		try {
+			const eventList = await EventGuestList.getEventsNotInList(guestId);
+			if(!eventList) return res.status(204).send(`Guest with id: ${guestId} is not in the list`);
+			res.status(200).send({
+				eventList,
+			});
+		} catch (error) {
+			sendError(error, res);
+		}
+	}
+);
 
 
 

@@ -38,6 +38,13 @@ export class EventApi {
 		});
 		return res.json();
 	}
+	static async eventGuestsNotInList(token, eventId) {
+		const res = await fetch(`${REACT_APP_BASE_URL}/events/event/${eventId}/notIn`, {
+			method: "GET",
+			headers: { authorization: `Bearer ${token}` },
+		});
+		return res.json();
+	}
 	
 	static async addEvent(token, event) {
 		const res = await fetch(`${REACT_APP_BASE_URL}/events`, {
@@ -75,6 +82,14 @@ export class EventApi {
 		});
 		return res.json();
 	}
+	static async allEventsNotInList(token, guestId) {
+		const res = await fetch(`${REACT_APP_BASE_URL}/guests/guest/${guestId}/notIn`, {
+			method: "GET",
+			headers: { authorization: `Bearer ${token}` },
+		});
+		return res.json();
+	}
+
 	static async addGuest(token, guest) {
 		const res = await fetch(`${REACT_APP_BASE_URL}/guests`, {
 			method: "POST",
