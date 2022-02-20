@@ -7,7 +7,8 @@ import { Container } from "../ui/Container/Container";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { GuestTable } from "../components/GuestTable";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../ui/Button/Button";
 
 export const Guests = () => {
 	const [guests, setGuests] = useState(null);
@@ -27,13 +28,12 @@ export const Guests = () => {
 
 	useEffect(() => {
 		fetchGuests();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	const navigateToGuestEvents = (e) => {
 		if (!e.target.id) {
 			return;
 		}
-		console.log(e.target.id)
-		console.log(e.target.value)
 		navigate("/guests/guest-events", {
 			state: {
 				guestId: e.target.id,
@@ -55,7 +55,11 @@ export const Guests = () => {
 			<Header title="All guests" />
 			<Container>
 				<GuestTable guests={guests} onClick={navigateToGuestEvents} />
+				<Link to="/guests/add">
+					<Button className="button-popup">+ ADD NEW GUEST</Button>
+				</Link>
 			</Container>
+			<Footer />
 		</div>
 	);
 };

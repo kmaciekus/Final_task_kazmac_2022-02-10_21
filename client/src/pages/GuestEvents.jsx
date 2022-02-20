@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { EventApi } from "../services/eventsApi";
 import { Event } from "../components/Event";
 import { Popup } from "../components/Popup";
@@ -18,7 +19,6 @@ export const GuestEvents = () => {
 	const [buttonPopup, setButtonPopup] = useState(false);
 	const { state } = useLocation();
 	const { token } = useAuth();
-	const navigate = useNavigate();
 
 	const guestId = state.guestId;
 	const guestName = state.guestName;
@@ -59,7 +59,7 @@ export const GuestEvents = () => {
 	const errorText = !error ? "Loading..." : `${error}`;
 	const eventsSection = !events ? (
 		<span>
-			You have no events yet <Link to="/add">Add</Link>
+			This guest has no events yet <Link to="/events/add">Add</Link>
 		</span>
 	) : (
 		events.map((event) => <Event key={event.id} event={event} />)
@@ -71,6 +71,7 @@ export const GuestEvents = () => {
 		return (
 			<Container>
 				<Header title={title} />
+				{errorText}
 				<Button className="button-popup" />
 				<Footer />
 				<Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
