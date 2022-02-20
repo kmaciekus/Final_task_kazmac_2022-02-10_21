@@ -68,12 +68,6 @@ export const EventGuests = () => {
 		fetchGuests();
 		fetchNotInGuests();
 		setButtonPopup(false);
-		// navigate("/guests/add", {
-		// 	state: {
-		// 		guestId: e.target.id,
-		// 		guestName: e.target.value,
-		// 	},
-		// });
 	};
 
 	const errorText = !error ? "Loading..." : `${error}`;

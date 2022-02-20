@@ -89,7 +89,7 @@ export default class EventGuestList {
 		try {
 			const conn = await getConnection();
 			const query = `
-			SELECT evnt.id as id evnt.name as name, evnt.date as date, evnt.archived as past
+			SELECT DISTINCT evnt.id as id, evnt.name as name, evnt.date as date, evnt.archived as past
 			FROM eventGuestLists AS egl
 				LEFT JOIN events AS evnt ON evnt.id = egl.event_id
 				WHERE guest_id=?
@@ -108,7 +108,7 @@ export default class EventGuestList {
 			const query = `
 			SELECT * FROM events
 				WHERE id NOT IN (
-					SELECT evnt.id as id
+					SELECT DISTINCT evnt.id as id
 					FROM eventGuestLists AS egl
 						LEFT JOIN events AS evnt ON evnt.id = egl.event_id
 						WHERE guest_id=?
