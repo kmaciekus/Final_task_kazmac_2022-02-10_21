@@ -14,7 +14,7 @@ export const Home = () => {
 	const [error, setError] = useState(null);
 	const { token, user } = useAuth();
 	const { state } = useLocation();
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const fetchEvents = async () => {
 		const events = await EventApi.allEvents(token);
@@ -26,16 +26,21 @@ export const Home = () => {
 		setError(events.error);
 	};
 
-  const onClick = (e) => {
-    if(!e.target.id) {
-      return;
-    }
-    navigate("/event-guests", { state: { eventId: e.target.id, eventName: e.target.children[0].innerText } });
-  }
+	const onClick = (e) => {
+		if (!e.target.id) {
+			return;
+		}
+		navigate("/event-guests", {
+			state: {
+				eventId: e.target.id,
+				eventName: e.target.children[0].innerText,
+			},
+		});
+	};
 
 	useEffect(() => {
 		fetchEvents();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const errorText = !error ? "Loading..." : `${error}`;
@@ -44,10 +49,14 @@ export const Home = () => {
 			You have no events yet <Link to="/add">Add</Link>
 		</span>
 	) : (
-		events.map((event) =>  <Event key={event.id} event={event} onClick={onClick} />)
+		events.map((event) => (
+			<Event key={event.id} event={event} onClick={onClick} />
+		))
 	);
 
-  const title = "Events";
+	const username = user ? user.username : "User"
+
+	const title = "Events";
 
 	if (!events) {
 		return (
@@ -60,8 +69,7 @@ export const Home = () => {
 					</span>
 				) : (
 					<span>
-						There are no events yet{" "}
-						<Link to="/add">Add</Link>
+						There are no events yet <Link to="/add">Add</Link>
 					</span>
 				)}
 				<Footer />
@@ -72,7 +80,7 @@ export const Home = () => {
 	return (
 		<div>
 			<Header title={title} />
-      <p>{`Logged in as ${user.username}`}</p>
+			<p>{`Logged in as ${username}`}</p>
 			<Container>{eventsSection}</Container>
 			<Footer />
 		</div>
