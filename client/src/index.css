@@ -17,6 +17,7 @@ code {
   --secondary-color: #adc56b;
   --page-width: 80%;
   --primary-font-family: "Libre Baskerville", cursive;
+  --border-radius-main: 5px;
   --header-border-radius: 68px 51px 34px 17px/17px 34px 51px 68px;
   --main-btn-border-radius: 17px 34px;
   --secondary-btn-border-radius: 17px 34px 51px;
