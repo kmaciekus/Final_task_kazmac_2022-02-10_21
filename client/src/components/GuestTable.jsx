@@ -2,7 +2,7 @@ import React from "react";
 import { Table, TBody, THead } from "../ui/Table/Table";
 import { Guest } from "./Guest";
 
-export const GuestTable = ({ guests }) => {
+export const GuestTable = ({ guests, onClick, type }) => {
 	
 	return (
 		<Table>
@@ -11,10 +11,11 @@ export const GuestTable = ({ guests }) => {
 					<th>Guest</th>
 					<th>Age</th>
 					<th>Email</th>
+					<th></th>
 				</tr>
 			</THead>
 			<TBody>
-				{guests.map((guest) => <Guest key={guest.id} guest={guest} />)}
+				{guests.map((guest) => <Guest key={guest.id} guest={guest} onClick={onClick} type={type} />)}
 			</TBody>
 		</Table>
 	);

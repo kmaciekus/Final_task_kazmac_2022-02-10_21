@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../authHook/useAuth";
 import { Footer } from "../components/Footer";
 import { GuestTable } from "../components/GuestTable";
@@ -19,6 +19,7 @@ export const EventGuests = () => {
 	const { token } = useAuth();
 	const { state } = useLocation();
 	const eventId = state.eventId;
+	const navigate = useNavigate();
 
 	const fetchGuests = async () => {
 		const guests = await EventApi.eventGuestList(token, eventId);
@@ -42,7 +43,32 @@ export const EventGuests = () => {
 		fetchGuests();
 	}, []);
 
-
+	const navigateToGuestEvents = (e) => {
+		if (!e.target.id) {
+			return;
+		}
+		navigate("/guests/guest-events", {
+			state: {
+				guestId: e.target.id,
+				guestName: e.target.value,
+			},
+		});
+	}
+	const addGuestToEvent = async (e) => {
+		if (!e.target.id) {
+			return;
+		}
+		const guestId = {guestId: e.target.id};
+		await EventApi.addGuestToEvent(token, guestId, eventId);
+		fetchGuests();
+		setButtonPopup(false);
+		// navigate("/guests/add", {
+		// 	state: {
+		// 		guestId: e.target.id,
+		// 		guestName: e.target.value,
+		// 	},
+		// });
+	}
 	const errorText = !error ? "Loading..." : `${error}`;
 	const title = `${state.eventName} Guests`;
 	if (!guests) {
@@ -57,7 +83,7 @@ export const EventGuests = () => {
 		<div>
 			<Header title={title} />
 			<Container>
-				<GuestTable guests={guests} />
+				<GuestTable guests={guests} onClick={navigateToGuestEvents} />
 				<Button
 					className="button-popup"
 					onClick={() => setButtonPopup(true)}
@@ -66,7 +92,7 @@ export const EventGuests = () => {
 				</Button>
 			</Container>
 			<Popup trigger={buttonPopup} setTrigger={setButtonPopup} >
-				<GuestTable guests={allGuests}/>
+				<GuestTable guests={allGuests} type={true} onClick={addGuestToEvent}/>
 				<Link to="/guests/add">
 					<Button className="button-popup">+ ADD NEW GUEST</Button>
 				</Link>
