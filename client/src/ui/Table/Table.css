@@ -1,15 +1,30 @@
-table{
-    table-layout: fixed;
-    border-collapse: collapse;
-    width: 100%;
-    
+table {
+	table-layout: fixed;
+	border-collapse: collapse;
+	width: 100%;
 }
-td{
-    padding: 5px;
+tr {
+	border-bottom: solid 1px rgb(185, 185, 185);
 }
-tbody{
-    text-align: center;
+td {
+
+	padding: 5px;
 }
-tfoot{
-    text-align: right;
+tbody {
+	text-align: center;
+}
+tfoot {
+	text-align: right;
+}
+
+.view {
+    font-weight: 700;
+}
+
+.view p {
+    display: inline-block;
+    border-radius: var(--border-radius-main);
+    background-color: rgb(180, 180, 180);
+    padding: 3px 20px;
+
 }

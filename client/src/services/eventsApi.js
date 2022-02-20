@@ -50,6 +50,17 @@ export class EventApi {
 		});
 		return res.json();
 	}
+	static async addGuestToEvent(token, guestId, eventId) {
+		const res = await fetch(`${REACT_APP_BASE_URL}/events/event/${eventId}`, {
+			method: "POST",
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify(guestId),
+		});
+		return res.json();
+	}
 	static async allGuests(token) {
 		const res = await fetch(`${REACT_APP_BASE_URL}/guests`, {
 			method: "GET",
