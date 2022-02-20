@@ -40,7 +40,7 @@ export default class EventGuestList {
 			VALUES (?, ?)
 			`;
 			const [{ insertId }] = await conn.query(query, [eventId, guestId]);
-			
+
 			return new EventGuestList({ id: insertId, eventId, guestId });
 		} catch (error) {
 			console.log("Couldn't assign to guest list", error);
@@ -55,10 +55,29 @@ export default class EventGuestList {
 			SELECT DISTINCT egl.guest_id as id, gst.fullname as fullname, gst.dob as dob, gst.email as email
 			FROM eventGuestLists AS egl
 				LEFT JOIN guests AS gst ON gst.id = egl.guest_id
-				WHERE egl.event_id=?
+				WHERE egl.event_id = ?
 			`;
-			const [guests] = await conn.query(query,[eventId]);
-			if(!guests) return null;
+			const [guests] = await conn.query(query, [eventId]);
+			if (!guests) return null;
+			return guests;
+		} catch (error) {
+			console.log("Couldn't get guest list", error);
+			throw error;
+		}
+	}
+	static async getGuestsNotInList(eventId) {
+		try {
+			const conn = await getConnection();
+			const query = `
+			SELECT * FROM guests
+				WHERE id NOT IN (
+			SELECT DISTINCT egl.guest_id as id
+			FROM eventGuestLists AS egl
+				LEFT JOIN guests AS gst ON gst.id = egl.guest_id
+				WHERE egl.event_id = ?)
+			`;
+			const [guests] = await conn.query(query, [eventId]);
+			if (!guests) return null;
 			return guests;
 		} catch (error) {
 			console.log("Couldn't get guest list", error);
@@ -75,8 +94,28 @@ export default class EventGuestList {
 				LEFT JOIN events AS evnt ON evnt.id = egl.event_id
 				WHERE guest_id=?
 			`;
-			const [events] = await conn.query(query,[guestId]);
-			if(!events) return null;
+			const [events] = await conn.query(query, [guestId]);
+			if (!events) return null;
+			return events;
+		} catch (error) {
+			console.log("Couldn't get events list", error);
+			throw error;
+		}
+	}
+	static async getEventsNotInList(guestId) {
+		try {
+			const conn = await getConnection();
+			const query = `
+			SELECT * FROM events
+				WHERE id NOT IN (
+					SELECT evnt.id as id
+					FROM eventGuestLists AS egl
+						LEFT JOIN events AS evnt ON evnt.id = egl.event_id
+						WHERE guest_id=?
+						)
+			`;
+			const [events] = await conn.query(query, [guestId]);
+			if (!events) return null;
 			return events;
 		} catch (error) {
 			console.log("Couldn't get events list", error);
