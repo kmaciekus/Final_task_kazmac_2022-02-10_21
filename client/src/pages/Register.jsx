@@ -21,11 +21,11 @@ export const Register = () => {
 			return setError("Please enter email and password");
 
 		const res = await EventApi.register(model);
-		if (res.err) return setError(res.err);
+		if (res.errors) return setError(res.errors);
 		setError(null);
 		navigate("/login");
 	};
-	const showError = error ? <Error error1={error}/> : "";
+	const showError = error ? <Error error={error}/> : "";
 
 	return (
 		<>

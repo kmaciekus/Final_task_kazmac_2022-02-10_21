@@ -25,7 +25,7 @@ export const Login = () => {
 		setLogError(null);
 		navigate("/", { state: { logedIn: model } });
 	};
-	const showError = error || logError ? <Error error1={error} error2={logError}/> :"";
+	const showError = error || logError ? <Error error={error+logError} /> :"";
 	return (
 		<>
 			<Header title="Login" />

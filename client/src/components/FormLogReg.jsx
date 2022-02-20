@@ -125,7 +125,7 @@ export const Form = ({ onUpdate, type }) => {
 				/>
 			</>
 		);
-	const showError = state.error.length ? <Error error1={state.error} /> : "";
+	const showError = state.error.length ? <Error error={state.error} /> : "";
 	useEffect(() => {
 		onUpdate({
 			firstname: state.firstname,
