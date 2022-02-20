@@ -63,7 +63,7 @@ router.get(
 			const eventList = await EventGuestList.getGuestEvents(guestId);
 			if(!eventList) return res.status(204).send(`Guest with id: ${guestId} is not in the list`);
 			res.status(200).send({
-				eventList,
+				events: eventList,
 			});
 		} catch (error) {
 			sendError(error, res);
@@ -79,7 +79,7 @@ router.get(
 			const eventList = await EventGuestList.getEventsNotInList(guestId);
 			if(!eventList) return res.status(204).send(`Guest with id: ${guestId} is not in the list`);
 			res.status(200).send({
-				eventList,
+				events: eventList,
 			});
 		} catch (error) {
 			sendError(error, res);

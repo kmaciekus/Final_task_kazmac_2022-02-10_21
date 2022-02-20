@@ -46,6 +46,7 @@ export const EventGuests = () => {
 	useEffect(() => {
 		fetchGuests();
 		fetchNotInGuests();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	
 	const navigateToGuestEvents = (e) => {
@@ -68,12 +69,6 @@ export const EventGuests = () => {
 		fetchGuests();
 		fetchNotInGuests();
 		setButtonPopup(false);
-		// navigate("/guests/add", {
-		// 	state: {
-		// 		guestId: e.target.id,
-		// 		guestName: e.target.value,
-		// 	},
-		// });
 	};
 
 	const errorText = !error ? "Loading..." : `${error}`;
