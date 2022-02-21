@@ -9,10 +9,10 @@ export const Guest = ({ guest, onClick, type }) => {
 	return (
 		<tr >
 			<td>{fullname}</td>
-			<td>{age}</td>
-			<td>{email}</td>
+			<td className="hide">{age}</td>
+			<td className="hide">{email}</td>
 			<td className="view">
-				<Button onClick={onClick} id={id} value={fullname}>{buttonText}</Button>
+				<Button className="view main" onClick={onClick} id={id} value={fullname}>{buttonText}</Button>
 			</td>
 		</tr>
 	);

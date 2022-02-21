@@ -1,32 +1,49 @@
 .form-field {
-    width: 50%;
+    width: var(--form-field-width);
     text-align: left;
     
 }
 .form-field.buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: var(--form-field-buttons-flex-direction);
+    align-items: center;
+    justify-content: var(--form-field-buttons-justify-content);
+    gap: 0.7rem;
 }
 
 .form-field input, textarea, select {
+
     margin-top: 0.3rem;
     width: 100%;
     padding: 0.5rem;
     border: none;
-    background-color: rgba(107, 81, 174, 0.253);
-    border-radius: var(--input-border-radius);
+    background-color:var(--form-input-background);
+    border-radius: var(--default-border-radius);
     overflow: hidden;
     font-family: var(--primary-font-family);
 }
 
+::placeholder{
+    color: var(--form-text-color);
+    font-family: var(--secondary-font-family);
+}
+
 .form-field label {
+    color: var(--main-color);
     margin-bottom: 0.5rem;
-    color: #f2f2f2;
-	background: var(--secondary-color);
-    font-family: var(--primary-font-family);
     font-size: 1.2rem;
-    border-radius: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 .form-control {
     margin-top: 0.5em;
+}
+input[type="datetime-local"]:not(:valid)::-webkit-datetime-edit {
+    color: var(--form-text-color);
+  }
+input[type="date"]:not(:valid)::-webkit-datetime-edit {
+    color: var(--form-text-color);
+  }
+select:first-child {
+    color: var(--form-text-color);
 }
