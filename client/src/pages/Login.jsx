@@ -21,28 +21,39 @@ export const Login = () => {
 		if (!model.email.length || !model.password.length)
 			return setLogError("Please enter email and password!");
 		const res = await login(model);
-		if (res.err) return setLogError(res.err);
+		if (res.error) return setLogError(res.error);
 		setLogError(null);
 		navigate("/", { state: { logedIn: model } });
 	};
-	const showError = error || logError ? <Error error={error+logError} /> :"";
+	const showError = error ? (
+		<FormField>
+			<div style={{ color: "red" }}>{error}</div>
+		</FormField>
+	) : (
+		""
+	);
+	const showLogError = logError ? (
+		<FormField>
+			<div style={{ color: "red" }}>{logError}</div>
+		</FormField>
+	) : (
+		""
+	);
 	return (
 		<>
 			<Header title="Login" />
 			<Container as="form" onSubmit={handleSubmit}>
 				<Form onUpdate={handleUpdate} />
 				{showError}
+				{showLogError}
 				<FormField className="buttons">
-					<Button
-						type="submit"
-						className="main"
-					>
+					<Button type="submit" className="main">
 						LOGIN
 					</Button>
 					<Button type="reset">CANCEL</Button>
 				</FormField>
 			</Container>
-			<Footer/>
+			<Footer />
 		</>
 	);
 };

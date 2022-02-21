@@ -28,12 +28,12 @@ export const AuthProvider = ({children}) => {
     const login = async (user) => {
         const res = await EventApi.login(user);
 
-        if (res.err) {
-            console.error(res.err);
+        if (res.error) {
+            console.error(res.error);
 
-            setState({error: res.err, token: null});
+            setState({error: res.error, token: null});
 
-            return {error: res.err};
+            return {error: res.error};
         }
 
         setState(({error: null, token: res.token}));
