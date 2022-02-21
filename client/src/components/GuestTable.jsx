@@ -9,8 +9,8 @@ export const GuestTable = ({ guests, onClick, type }) => {
 				<THead>
 					<tr>
 						<th>Guest</th>
-						<th>Age</th>
-						<th>Email</th>
+						<th className="hide">Age</th>
+						<th className="hide">Email</th>
 						<th></th>
 					</tr>
 				</THead>

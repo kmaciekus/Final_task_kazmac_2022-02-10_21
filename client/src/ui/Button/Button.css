@@ -1,40 +1,51 @@
 .button {
-    min-width: 85px;
-    margin: 0.5em;
-    border: none;
-    border-radius: var(--secondary-btn-border-radius);
-    font-size: 0.8em;
-    padding: 0.5em 1em;
-    cursor: pointer;
-    background-color: #fff;
-    color: var(--main-color);
-    border:  1px solid var(--main-color);
-    font-family: var(--primary-font-family);
+	min-width: 85px;
+	margin: 0.5em;
+	padding: 0.5em 1em;
+	border: none;
+	border-radius: var(--button-border-radius);
+	font-weight: bold;
+	font-size: 0.8em;
+	cursor: pointer;
+	background-color: #fff;
+	color: var(--main-color);
+	border: 1px solid var(--main-color);
+    -webkit-box-shadow: 2px 2px 7px 0px rgba(255, 255, 255, 0.5);
+	-moz-box-shadow: 2px 2px 7px 0px rgba(255, 255, 255, 0.5);
+	box-shadow: 2px 2px 7px 0px rgba(255, 255, 255, 0.5);
 }
-.button:disabled{
-    background-color: grey;
+.button:disabled {
+	background-color: grey;
 }
 .button-popup {
-    width: 100%;
-    /* width: 200px;
+	width: 100%;
+	/* width: 200px;
     height: 100px;
     margin: 0.5em;
     border: none;
     border-radius: 0.5em;
     font-size: 0.6em;
     padding: 0.75em 2em; */
-    cursor: pointer;
+	cursor: pointer;
+}
+
+.view {
+	margin: var(--button-margin);
+	padding: var(--button-padding);
+	min-width: var(--button-min-width);
+	font-size: var(--button-font-size);
+	min-height: var(--button-min-height);
+
 }
 
 .main {
-    background-color: var(--secondary-color);
-    color: #fff;
-    border:  1px solid #fff;
-    border-radius: var(--main-btn-border-radius);
+	background-color: var(--main-color);
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: var(--button-border-radius);
+	
 }
 
-.white {
-    background-color: var(--main-background);
-    color: rgba(251,129,22,255);
-    border:  1px solid rgba(251,129,22,255);
+.btn-popup-close {
+	background-color: black;
 }

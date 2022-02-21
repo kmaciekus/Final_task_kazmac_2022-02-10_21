@@ -1,7 +1,8 @@
 .navbar {
-	width: var(--page-width);
+	width: 100%;
 	margin: auto;
 	padding: 1rem;
+	background: var(--default-background);
 }
 
 .navLinks {
@@ -13,29 +14,22 @@
 .navLinks img {
 	height: 60px;
 }
-.logo-wrapper {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: center;
-	align-content: stretch;
-}
 .logo-title {
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Arial Narrow', Arial, sans-serif ;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif, "Arial Narrow", Arial, sans-serif;
 	font-style: normal;
 	font-weight: bolder;
 	text-align: center;
 	font-size: 24px;
 
-	color: #7e0093;
+	color: var(--main-color);
 }
 .page-title {
-	color: var(--secondary-color);
-	font-size: 2rem;
+	color: var(--main-color);
+	font-size: var(--navbar-title-font-size);
 	line-height: 2rem;
 	font-weight: 700;
-	font-family: var(--secondary-font-family);
+	font-family: var(--main-font-family);
 }
 .navLinks a,
 i {
@@ -57,31 +51,32 @@ i {
 
 .navbar-links {
 	display: var(--navbar-links-display);
+	margin: 0 4%;
 }
 .navbar-menu {
 	display: var(--navbar-menu-display);
+	margin: 0 5%;
 }
 .navbar-menu-container {
 	display: var(--navbar-menu-display-container);
-    justify-content: space-around;
-    /* align-items: center; */
-    flex-direction: column;
-    
-    text-align: end;
-    background: var(--menu-background);
-    padding: 1rem;
-    position: absolute;
-    right: 0;
-    top: 40px;
-    margin-top: 1rem;
-    min-width: 150px;
-    min-height: 150px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0,0, 0,0.2);
+	justify-content: space-around;
+	/* align-items: center; */
+	flex-direction: column;
+
+	text-align: end;
+	background: var(--menu-background);
+	padding: 1rem;
+	position: absolute;
+	right: 0;
+	top: 40px;
+	margin-top: 1rem;
+	min-width: 150px;
+	min-height: 150px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 	font-size: 1.5rem;
 }
 .navbar-menu-container > div {
-
 	border-bottom: 2px solid var(--default-background);
 }
 .navbar-menu-container-item {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaEtsy, FaKickstarterK } from "react-icons/fa";
 
 import { useAuth } from "../authHook/useAuth";
 import { useMenu } from "../menuHook/menuContext";
@@ -53,10 +54,8 @@ export const Navbar = () => {
   return (
 	<NavbarWrapper>
 		<NavLinks>
-			<Link to="/" className="logo-wrapper">
-				<Logo src={letterK} />
-				<Logo src={letterE} />
-				<Item className="logo-title">vents</Item>
+			<Link to="/">
+				<Item className="logo-title"> <FaKickstarterK className="bigger"/> <FaEtsy />vents</Item>
 			</Link>
 			<Item className="page-title">Event Planner</Item>
 			{links}

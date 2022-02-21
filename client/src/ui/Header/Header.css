@@ -7,14 +7,13 @@
 
 .header h1 {
     display: inline-block;
-	color: #f2f2f2;
-	background: var(--secondary-color);
-	font-size: 5rem;
-	line-height: 5rem;
+	color: var(--main-color);
+	/* background: var(--secondary-color); */
+	font-size: var(--header-h1-font-size);
+	line-height: var(	--header-h1-font-size);
 	font-weight: 700;
 	margin: 0 5px 24px;
 	/* float: left; */
 	padding: 0.7rem;
 	font-family: var(--primary-font-family);
-    border-radius: var(--header-border-radius);
 }

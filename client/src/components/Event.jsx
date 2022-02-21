@@ -10,11 +10,11 @@ export const Event = ({ event, onClick }) => {
 		return (
 			<Card onClick={onClick} id={id}>
 				<CardTextHolder>
-					<CardTitle>{name}</CardTitle>
+					<CardTitle>{`Event: ${name}`}</CardTitle>
 				</CardTextHolder>
 				<CardTextHolder>
-					<CardInfoText>{fullDate}</CardInfoText>
-					<CardInfoText>{time}</CardInfoText>
+					<CardInfoText>{`On: ${fullDate}`}</CardInfoText>
+					<CardInfoText>{`At: ${time}`}</CardInfoText>
 				</CardTextHolder>
 			</Card>
 		);

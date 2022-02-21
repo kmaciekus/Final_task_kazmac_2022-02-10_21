@@ -5,38 +5,36 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #333;
+  color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.react-icons {
+  font-size: 1.5rem;
+}
+.footer{
+  margin-top: 15px;
+}
 :root {
-  --main-color: rgb(107,81,174);
-  --secondary-color: #adc56b;
-  --page-width: 80%;
-  --primary-font-family: "Libre Baskerville", cursive;
-  --border-radius-main: 5px;
-  --header-border-radius: 68px 51px 34px 17px/17px 34px 51px 68px;
-  --main-btn-border-radius: 17px 34px;
-  --secondary-btn-border-radius: 17px 34px 51px;
-  --input-border-radius: 17px 34px 51px 8.5px;
-
+  
   --page-height: 100vh;
   --page-width: 90vw;
   
-  --main-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  
+  --main-color: rgb(255, 153, 0); /*#CC8DFF;*/
+  --secondary-color: #adc56b;
+  --primary-font-family: "Libre Baskerville", cursive;
   --secondary-font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
-  --main-color: rgb(37, 150, 190);
-  --default-background: rgba(0,0,0,0.1);
+  --default-background: black;
   --menu-background: rgba(0,0,0,0.8);
   --default-border-radius: 5px;
   
-  --title-font-size: 5em;
+  --title-font-size: 5rem;
   
   --navbar-width: 90vw;
   --navbar-links-display: none;
@@ -47,22 +45,29 @@ code {
   
   --header-h1-font-size: 2rem;
   --header-h4-font-size: 1rem;
+
+  --card-background:  var(--main-color);
+  --card-filter:  drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  --card-width: 200px;
+  --card-flex-direction: column;
+  --card-justify-content: center;
   
   --form-field-width: 80%;
   --form-margin: 40vh auto 0;
   --from-transform: translateY(-50%);
-  --form-input-background: rgba(255, 255, 255, 0.3);
-  --form-text-color: #333;
+  --form-input-background: rgba(194, 194, 194, 0.253);
+  --form-text-color: rgb(206, 5, 5);
   --form-field-buttons-flex-direction: column;
   --form-field-buttons-justify-content: space-between;
   
   --box-shadow: 5px 5px 5px 0px rgba(128, 128, 128, 0.4);
   
-  --button-width: 15rem;
-  --button-height: 7.5rem;
+  --button-min-width: 25px;
+  --button-min-height: auto;
+  --button-margin: 0;
+  --button-padding: 0.25em 0.5em;
+  --button-font-size:  0.8em;
   --button-border-radius: 10px;
-  --button-margin: 15px;
-  --button-font-size: 3rem;
   --button-color:rgb(197, 225, 222);
   --button-border-color: rgb(180, 180, 180);
   
@@ -70,11 +75,14 @@ code {
   --reg-button-height: 4.688rem;
   --reg-button-margin: 0.5rem;
   --reg-button-font-size: 1rem;
+
+  --td-view: none;
 }
 
 @media screen and (min-width:360px){
   :root{
     --form-field-buttons-flex-direction: row;
+    --card-width: 100%;
   }
   
 }
@@ -87,8 +95,12 @@ code {
     --header-h1-font-size: 3rem;
     --header-h4-font-size: 1.5rem;
     
-    --navbar-title-font-size: 2rem;
     
+    --navbar-title-font-size: 2rem;
+    --card-flex-direction: row;
+    --card-justify-content: space-around;
+    
+    --td-view: table-cell;
   }
 }
 
@@ -96,6 +108,17 @@ code {
   :root {
     --form-field-width: 60%;
     --form-field-buttons-justify-content: space-around;
+    
+    --card-width: 200px;
+    --card-flex-direction: column;
+    --card-justify-content: center;
+    
+    --button-min-width: 85px;
+    --button-margin: 0.5em;
+    --button-padding: 0.5em 1em;
+    --button-font-size:  0.8em;
+    --button-min-height: auto;
+
   }
 }
 
@@ -107,8 +130,5 @@ code {
     --navbar-links-display: flex;
     --navbar-menu-display: none;
     --navbar-menu-display-container: none;
-  }
-  body, html {
-    background-repeat:no-repeat ;
   }
 }
