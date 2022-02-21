@@ -7,6 +7,7 @@ import { Item, NavbarMenuContainer, NavbarMenuItemHolder, Navigation } from "../
 
 export const Menu = ({menuSwitch, toggleMenu}) => {
 	const { token, logout } = useAuth();
+	const menuMask = <div className="mask" onClick={menuSwitch}></div>
 	const menu = !token ? (
 		<NavbarMenuContainer>
 			<NavbarMenuItemHolder>
@@ -60,6 +61,7 @@ export const Menu = ({menuSwitch, toggleMenu}) => {
 		<>
 			{menuBar}
 			{toggleMenu && menu}
+			{toggleMenu && menuMask}
 		</>
 	);
 };

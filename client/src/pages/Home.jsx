@@ -33,7 +33,8 @@ export const Home = () => {
 		navigate("/event-guests", {
 			state: {
 				eventId: e.target.id,
-				eventName: e.target.children[0].innerText,
+				// eventName: e.target.children[0].innerText,
+				eventName: e.target.innerText,
 			},
 		});
 	};
@@ -54,7 +55,7 @@ export const Home = () => {
 		))
 	);
 
-	const username = user ? user.username : "User"
+	const username = user ? user.username : "User";
 
 	const title = "Events";
 

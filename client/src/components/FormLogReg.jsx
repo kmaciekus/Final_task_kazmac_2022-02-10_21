@@ -2,7 +2,7 @@ import { Field } from "../components/Field";
 import React, { useEffect, useReducer } from "react";
 
 import { ACTIONS } from "../variables/variables";
-import { Error } from "../components/Error";
+import { FormField } from "../ui/FormFIeld/FormField";
 
 const { SET_FIRSTNAME, SET_LASTNAME, SET_EMAIL, SET_PASSWORD, SET_ERROR } =
 	ACTIONS;
@@ -125,7 +125,13 @@ export const Form = ({ onUpdate, type }) => {
 				/>
 			</>
 		);
-	const showError = state.error.length ? <Error error={state.error} /> : "";
+	const showError = state.error.length ? (
+		<FormField>
+			<div style={{ color: "red" }}>{state.error}</div>
+		</FormField>
+	) : (
+		""
+	);
 	useEffect(() => {
 		onUpdate({
 			firstname: state.firstname,

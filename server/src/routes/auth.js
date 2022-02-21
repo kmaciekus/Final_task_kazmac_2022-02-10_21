@@ -15,7 +15,7 @@ const router = Router();
 router.post(
 	"/register",
 	body(["firstname", "lastname", "email", "password"]).exists().notEmpty().withMessage("Field is missing"),
-	body(["firstname", "lastname"]).trim().isAlpha().escape().withMessage("Firstname and lastname must not contain numbers")
+	body(["firstname", "lastname"]).trim().isAlpha("en-US",{ignore: ["Ą","ą","Č","č","Ę","ę","Ė","ė","Į","į","Š","š","Ų","ų","Ū","ū"]}).escape().withMessage("Firstname and lastname must contain only letters")
 		.isLength({min:2, max: 25}).withMessage("Firstname and lastname must be between 2 and 25 letters"),
 	checkSchema(registrationSchema),
 	validateErrorsMiddleware,

@@ -5,7 +5,7 @@
 	justify-content: var(--card-justify-content);
 	align-items: center;
 	gap: 0.5em;
-	padding: 1em;
+	padding: 2em;
 	width: var(--card-width);
 	height: auto;
 	overflow: hidden;
@@ -15,6 +15,7 @@
 	background: var(--card-background);
 	letter-spacing: 1px;
 	color: black;
+	cursor: pointer;
 	/* -webkit-box-shadow: 5px 5px 5px 0px rgba(214, 214, 214, 0.15);
 	-moz-box-shadow: 5px 5px 5px 0px rgba(214, 214, 214, 0.15);
 	box-shadow: 5px 5px 5px 0px rgba(214, 214, 214, 0.15); */
@@ -31,6 +32,9 @@ p {
 .card h4 {
 	font-size: 1.5rem;
 	border-bottom: 2px solid;
+}
+.card h4:hover{
+	color: red;
 }
 .card p {
 	font-size: 1.2rem;
